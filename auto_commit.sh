@@ -6,21 +6,18 @@ PROJECT_PATH="/c/Users/zozou/Documents/AutoCommit"
 # Se déplacer dans le dossier du projet
 cd "$PROJECT_PATH" || exit
 
-# Fichier log pour suivre l'exécution
-LOG_FILE="$PROJECT_PATH/logs.txt"
+# Fichier qui change à chaque exécution pour forcer un commit
+FORCE_FILE="$PROJECT_PATH/force_commit.txt"
+echo "Dernière exécution : $(date)" > "$FORCE_FILE"
 
-# Ajouter tous les fichiers modifiés
-echo "$(date): Ajout des fichiers modifiés..." >> "$LOG_FILE"
-git add . >> "$LOG_FILE" 2>&1
+# Ajouter uniquement le fichier qui force le commit
+git add "$FORCE_FILE"
 
 # Faire un commit avec la date et l'heure
 COMMIT_MESSAGE="Auto-commit: $(date +'%Y-%m-%d %H:%M:%S')"
-echo "$(date): Commit en cours..." >> "$LOG_FILE"
-git commit -m "$COMMIT_MESSAGE" >> "$LOG_FILE" 2>&1
+git commit -m "$COMMIT_MESSAGE"
 
 # Pousser les modifications sur GitHub
-echo "$(date): Pushing to GitHub..." >> "$LOG_FILE"
-git push origin main >> "$LOG_FILE" 2>&1
+git push origin main
 
-# Vérification finale
-echo "$(date): Script exécuté avec succès ! ✅" >> "$LOG_FILE"
+echo "✅ Commit forcé avec succès et poussé sur GitHub."
