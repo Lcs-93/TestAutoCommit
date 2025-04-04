@@ -18,6 +18,6 @@ COMMIT_MESSAGE="Auto-commit: $(date +'%Y-%m-%d %H:%M:%S')"
 git commit -m "$COMMIT_MESSAGE"
 
 # Pousser les modifications sur GitHub
-git push origin main
+git push origin main --force
 
 echo "✅ Commit forcé avec succès et poussé sur GitHub."
